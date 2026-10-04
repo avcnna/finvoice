@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <script>
+      window['__codeletBootstrap__'] = JSON.parse(
+        '{"A":"A","B":"20261002-05-536c453","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YACgEZulLoA,0","Arial Narrow":"YAGyDvJ_4Ts,0","Arial Rounded MT Bold":"YAFcfoaHu-s,0","Arial":"YAGyDvJ_4Ts,0","Avenir Next":"YAFcfmNq6UY,0","Baloo 2":"YADK30bC6HQ,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Broken Glyph":"YADZ-exUkv0,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAFcfvtOAUY,1","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Georgia":"YAGzXkO0pEM,0","Ghost Mono":"YAHQutsX00Q,0","Hanken Grotesk":"YAFcfhwp99E,0","Helvetica Neue":"YAFcf6CtJfI,0","Helvetica":"YAFcf6CtJfI,0","IBM Plex Mono":"YAFdJkmvhGI,0","Impact":"YAFcfnjI7Vk,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YADK3zbC6RM,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Oswald":"YACgEQY10lw,0","Pacifico":"YADLjORQ1u4,0","Phantom Sans":"YAFdJvgJ5TU,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAGvf3_u0_Q,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Source Serif 4":"YACgEfdj394,0","Space Grotesk":"YADZ-dYEmhg,0","Space Mono":"YADW1-vpsoc,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","UV Display":"YAEdVfSSpYo,0","UV Sans":"YAFdJvgJ5TU,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YAD1aFjegN8,0","ui-sans-serif":"YACkoD1yZN0,0"}}'
+      );
+    </script>
+    <script
+      src="/_sdk/6542d56fbfe7a3eb.telemetry_sdk.js"
+      integrity="sha512-ECdM0nK7EkwDuOqho2qxgyRQXyBHk9hZqRKMBr+Xsu6zjeHlt+qkO2N2YRiHN7Kg4e1fEHDhjIp4bGJYVypv1g=="
+    ></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinVoice — Voice-to-Transaction Prototype</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #eaf4ff;
+        --muted: #8fa4bc;
+        --line: rgba(140, 185, 255, 0.16);
+        --cyan: #44e9ff;
+        --violet: #a78bfa;
+        --phone: #111724;
+        --screen: #0b1120;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        width: 100%;
+        min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+        font-family: 'DM Sans', sans-serif;
+        color: var(--ink);
+        overflow-x: hidden;
+        background: #060912;
+      }
+      .finvoice-shell {
+        width: 100%;
+        min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(
+            circle at 18% 42%,
+            rgba(42, 211, 255, 0.13),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 83% 58%,
+            rgba(133, 92, 246, 0.13),
+            transparent 33%
+          ),
+          linear-gradient(135deg, #05070d 0%, #09101c 48%, #060812 100%);
+      }
+      .finvoice-shell::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.34;
+        background-image: linear-gradient(
+            rgba(151, 198, 255, 0.045) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            90deg,
+            rgba(151, 198, 255, 0.045) 1px,
+            transparent 1px
+          );
+        background-size: 48px 48px;
+        mask-image: radial-gradient(circle at center, black, transparent 78%);
+        z-index: -1;
+      }
+      .hero-wrap {
+        width: 100%;
+        max-width: 1250px;
+        margin: 0 auto;
+        padding: 34px 28px 24px;
+      }
+      .eyebrow {
+        font-family: 'Space Mono', monospace;
+        letter-spacing: 0.16em;
+        font-size: 10px;
+        color: #76e9ff;
+        text-transform: uppercase;
+      }
+      .brand-title {
+        letter-spacing: -0.055em;
+      }
+      .phone {
+        width: min(330px, 82vw);
+        height: 650px;
+        padding: 8px;
+        position: relative;
+        border-radius: 42px;
+        background: linear-gradient(145deg, #2a3548, #080c14 35%, #1f2b3c);
+        box-shadow: 0 28px 65px rgba(0, 0, 0, 0.52),
+          0 0 0 1px rgba(178, 214, 255, 0.12), 0 0 34px rgba(54, 180, 255, 0.11);
+        flex: 0 0 auto;
+      }
+      .screen {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        border-radius: 35px;
+        background: var(--screen);
+        border: 1px solid rgba(207, 230, 255, 0.08);
+      }
+      .notch {
+        width: 92px;
+        height: 25px;
+        border-radius: 0 0 15px 15px;
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #05070d;
+      }
+      .home-screen {
+        background: radial-gradient(
+            circle at 70% 22%,
+            rgba(65, 104, 199, 0.4),
+            transparent 23%
+          ),
+          linear-gradient(150deg, #101d35, #060a14 65%, #111225);
+      }
+      .home-screen::after {
+        content: '';
+        inset: 0;
+        position: absolute;
+        pointer-events: none;
+        background: linear-gradient(
+          145deg,
+          transparent 0 47%,
+          rgba(95, 202, 255, 0.09) 48%,
+          transparent 51%
+        );
+      }
+      .statusbar {
+        font-size: 10px;
+        font-weight: 700;
+        position: relative;
+        z-index: 2;
+      }
+      .widget {
+        position: relative;
+        z-index: 2;
+        margin: 20px 15px 0;
+        padding: 17px;
+        border: 1px solid rgba(166, 234, 255, 0.24);
+        border-radius: 24px;
+        background: linear-gradient(
+          125deg,
+          rgba(19, 43, 69, 0.78),
+          rgba(21, 18, 48, 0.66)
+        );
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.11),
+          0 14px 34px rgba(1, 7, 18, 0.27);
+        backdrop-filter: blur(14px);
+      }
+      .mic-button {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: #06111a;
+        background: linear-gradient(135deg, #6ff5ff, #63a9ff);
+        box-shadow: 0 0 0 0 rgba(79, 226, 255, 0.5),
+          0 12px 24px rgba(32, 151, 255, 0.32);
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+      }
+      .mic-button:hover {
+        transform: translateY(-2px) scale(1.03);
+      }
+      .mic-button:focus-visible,
+      button:focus-visible {
+        outline: 3px solid #f6fcff;
+        outline-offset: 3px;
+      }
+      .is-listening .mic-button {
+        animation: micPulse 1.25s infinite;
+      }
+      @keyframes micPulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(79, 226, 255, 0.54),
+            0 12px 24px rgba(32, 151, 255, 0.32);
+        }
+        70% {
+          box-shadow: 0 0 0 16px rgba(79, 226, 255, 0),
+            0 12px 24px rgba(32, 151, 255, 0.32);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(79, 226, 255, 0),
+            0 12px 24px rgba(32, 151, 255, 0.32);
+        }
+      }
+      .wave {
+        height: 24px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+      }
+      .is-listening .wave {
+        display: flex;
+      }
+      .wave b {
+        width: 3px;
+        border-radius: 20px;
+        background: #6defff;
+        animation: wave 0.75s ease-in-out infinite alternate;
+      }
+      .wave b:nth-child(1) {
+        height: 7px;
+      }
+      .wave b:nth-child(2) {
+        height: 17px;
+        animation-delay: 0.12s;
+      }
+      .wave b:nth-child(3) {
+        height: 10px;
+        animation-delay: 0.24s;
+      }
+      .wave b:nth-child(4) {
+        height: 21px;
+        animation-delay: 0.08s;
+      }
+      .wave b:nth-child(5) {
+        height: 9px;
+        animation-delay: 0.3s;
+      }
+      @keyframes wave {
+        to {
+          transform: scaleY(0.42);
+          opacity: 0.5;
+        }
+      }
+      .app-grid {
+        position: absolute;
+        z-index: 2;
+        bottom: 76px;
+        left: 20px;
+        right: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px 13px;
+      }
+      .app-icon {
+        width: 45px;
+        height: 45px;
+        margin: auto;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: rgba(226, 241, 255, 0.11);
+        box-shadow: inset 0 1px rgba(255, 255, 255, 0.15);
+      }
+      .search-pill {
+        position: absolute;
+        z-index: 2;
+        bottom: 20px;
+        left: 18px;
+        right: 18px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 14px;
+        border-radius: 22px;
+        background: rgba(228, 243, 255, 0.12);
+        color: #d2e4f5;
+        backdrop-filter: blur(12px);
+        font-size: 12px;
+      }
+      .flow {
+        width: 130px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 9px;
+        color: #8ca9c4;
+      }
+      .flow-line {
+        width: 2px;
+        height: 43px;
+        background: linear-gradient(#57edff, #9d7cff);
+        position: relative;
+        box-shadow: 0 0 14px #4de6ff;
+      }
+      .flow-line::after {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-top: 2px solid #9d7cff;
+        border-right: 2px solid #9d7cff;
+        transform: rotate(135deg);
+        position: absolute;
+        bottom: -1px;
+        left: -3px;
+      }
+      .flow.active .flow-line {
+        animation: flowPulse 0.7s infinite alternate;
+      }
+      @keyframes flowPulse {
+        to {
+          opacity: 0.28;
+          transform: scaleY(0.85);
+        }
+      }
+      .finance-screen {
+        background: linear-gradient(165deg, #0d1625, #080c15);
+      }
+      .money-card {
+        margin: 19px 15px 10px;
+        padding: 15px;
+        border-radius: 18px;
+        background: linear-gradient(125deg, #172a44, #10192d);
+        border: 1px solid rgba(113, 206, 255, 0.17);
+      }
+      .metric-value {
+        transition: color 0.35s ease, transform 0.35s ease;
+      }
+      .metric-value.changed {
+        color: #72f4ff;
+        transform: scale(1.04);
+      }
+      .transaction-list {
+        padding: 4px 15px 30px;
+      }
+      .tx-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 0;
+        border-bottom: 1px solid rgba(185, 215, 255, 0.075);
+      }
+      .tx-icon {
+        height: 31px;
+        width: 31px;
+        flex: 0 0 auto;
+        display: grid;
+        place-items: center;
+        border-radius: 11px;
+        background: #17263b;
+        color: #8eefff;
+      }
+      .new-tx {
+        display: none;
+        cursor: pointer;
+        border-radius: 14px;
+        margin: 5px -7px;
+        padding: 10px 7px;
+        border-bottom: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(61, 228, 255, 0.15),
+          rgba(145, 105, 255, 0.09)
+        );
+        box-shadow: 0 0 22px rgba(65, 225, 255, 0.16);
+      }
+      .new-tx.visible {
+        display: flex;
+        animation: reveal 0.55s ease both;
+      }
+      @keyframes reveal {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .detail-sheet {
+        display: none;
+        position: absolute;
+        z-index: 8;
+        inset: 0;
+        padding: 67px 18px 18px;
+        background: rgba(6, 11, 20, 0.96);
+        backdrop-filter: blur(10px);
+      }
+      .detail-sheet.open {
+        display: block;
+        animation: reveal 0.24s ease;
+      }
+      .detail-card {
+        padding: 18px;
+        border: 1px solid rgba(126, 219, 255, 0.19);
+        border-radius: 22px;
+        background: linear-gradient(150deg, #142238, #0d1422);
+      }
+      .detail-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 9px 0;
+        font-size: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .detail-row span:last-child {
+        color: #dcecff;
+        text-align: right;
+      }
+      .demo-button {
+        display: none;
+        width: 100%;
+        margin-top: 11px;
+        padding: 9px;
+        border: 1px solid rgba(112, 232, 255, 0.4);
+        border-radius: 12px;
+        color: #adf5ff;
+        font-size: 12px;
+        background: rgba(20, 91, 121, 0.22);
+      }
+      .demo-mode .demo-button {
+        display: block;
+      }
+      .demo-mode .mic-button {
+        opacity: 0.45;
+        filter: grayscale(0.25);
+      }
+      .toast {
+        min-height: 18px;
+      }
+      @media (max-width: 800px) {
+        .hero-wrap {
+          padding: 28px 18px;
+        }
+        .phone {
+          transform: scale(0.91);
+          margin: -28px;
+        }
+        .flow {
+          width: 74px;
+        }
+      }
+      @media (max-width: 620px) {
+        .hero-wrap {
+          padding-top: 24px;
+        }
+        .phone-stage {
+          flex-direction: column;
+          gap: 34px !important;
+        }
+        .phone {
+          transform: none;
+          margin: 0;
+          width: min(340px, 92vw);
+          height: 645px;
+        }
+        .flow {
+          width: 100%;
+          flex-direction: row;
+          justify-content: center;
+          height: 44px;
+        }
+        .flow-line {
+          width: 54px;
+          height: 2px;
+        }
+        .flow-line::after {
+          transform: rotate(45deg);
+          bottom: -3px;
+          left: auto;
+          right: -1px;
+        }
+        .flow.active .flow-line {
+          animation: flowPulseHorizontal 0.7s infinite alternate;
+        }
+        @keyframes flowPulseHorizontal {
+          to {
+            opacity: 0.28;
+            transform: scaleX(0.75);
+          }
+        }
+      }
+    </style>
+    <script
+      src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"
+      type="text/javascript"
+    ></script>
+    <script
+      src="https://cdn.tailwindcss.com/3.4.17"
+      type="text/javascript"
+    ></script>
+    <script
+      src="/_sdk/6c2ecc939521f244.data_sdk.js"
+      type="text/javascript"
+      integrity="sha512-gRx8s+XsZDN6mSIQu2sivLZysbV0WHhb5kXNUWlgVb5lCMU1foJYukyMEDPv8Tnoocb8iwqB4XdRrWc7oEGzIQ=="
+    ></script>
+    <script
+      src="/_sdk/b443124ed7f67435.editing_sdk.js"
+      type="text/javascript"
+      integrity="sha512-oLX1dpTmN2mZumhKQc0okubrUJ8MqA6c5fM5NHln6+9t8KpYrcElyL7NOV7dV6pLkMWSzWZRFAI+WLGRVrl64A=="
+    ></script>
+    <script
+      src="/_sdk/ab4336f91e694f96.resizing_sdk.js"
+      type="text/javascript"
+      integrity="sha512-cxmeUrBrNlwwLr+tEu/iwM5F3boeK4qDMoH3QjUPqJptkO5NkaDVhQvyIHIn+3EflI5/uubWzkSA78B1tCswgA=="
+    ></script>
+  </head>
+  <body
+    data-template-id="__page-root"
+    style="background: linear-gradient(135deg, rgb(5, 7, 13), rgb(9, 16, 28))"
+  >
+    <div class="finvoice-shell">
+      <header class="hero-wrap">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p
+              data-template-id="prototype-label"
+              class="canva-tag eyebrow"
+              style="
+                color: rgb(118, 233, 255);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 16px;
+                letter-spacing: 0.12rem;
+              "
+            >
+              VOICE-TO-TRANSACTION PROTOTYPE
+            </p>
+            <h1
+              data-template-id="brand-title"
+              class="canva-text brand-title mt-3 text-4xl font-bold sm:text-5xl"
+              style="
+                color: rgb(238, 248, 255);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 32px;
+              "
+            >
+              FINVOICE
+            </h1>
+          </div>
+          <div
+            class="hidden sm:flex mt-2 h-10 w-10 items-center justify-center rounded-full border border-cyan-200/20 bg-cyan-300/5 text-cyan-200"
+          >
+            <i data-lucide="audio-lines" width="19" height="19"></i>
+          </div>
+        </div>
+        <p
+          data-template-id="brand-tagline"
+          class="canva-text mt-3 text-xl font-medium text-cyan-100"
+          style="
+            color: rgb(207, 249, 255);
+            font-weight: 600;
+            font-style: normal;
+            font-size: 20px;
+          "
+        >
+          Speak. Record. Done.
+        </p>
+        <p
+          data-template-id="brand-subheadline"
+          class="canva-text mt-1 max-w-xl text-sm text-slate-400"
+          style="
+            color: rgb(156, 175, 198);
+            font-weight: 400;
+            font-style: normal;
+            font-size: 14px;
+          "
+        >
+          Catat pengeluaran tanpa membuka aplikasi keuangan.
+        </p>
+      </header>
+      <main class="hero-wrap pt-4">
+        <section
+          class="phone-stage flex items-center justify-center gap-9 lg:gap-14"
+          aria-label="Demonstrasi input suara FinVoice"
+        >
+          <article
+            class="phone"
+            aria-label="Mockup layar utama Android dengan widget FinVoice"
+          >
+            <div class="screen home-screen">
+              <div class="notch"></div>
+              <div
+                class="statusbar flex justify-between px-6 pt-3 text-slate-100"
+              >
+                <span>17.09</span>
+                <span class="flex gap-1"
+                  ><i data-lucide="signal" width="12" height="12"></i
+                  ><i data-lucide="wifi" width="12" height="12"></i
+                  ><i data-lucide="battery-full" width="13" height="13"></i
+                ></span>
+              </div>
+              <div id="voice-widget" class="widget">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <h2
+                      data-template-id="widget-title"
+                      class="canva-text text-base font-bold"
+                      style="
+                        color: rgb(255, 255, 255);
+                        font-weight: 700;
+                        font-style: normal;
+                        font-size: 24px;
+                      "
+                    >
+                      FinVoice
+                    </h2>
+                    <p
+                      data-template-id="widget-subtitle"
+                      class="canva-text mt-1 text-xs text-slate-300"
+                      style="
+                        color: rgb(215, 233, 246);
+                        font-weight: 400;
+                        font-style: normal;
+                        font-size: 12px;
+                      "
+                    >
+                      Catat keuangan dengan suara
+                    </p>
+                  </div>
+                  <span
+                    class="rounded-full bg-cyan-300/10 px-2 py-1 text-[9px] font-bold tracking-wider text-cyan-200"
+                    >LIVE</span
+                  >
+                </div>
+                <div class="mt-4 flex items-center gap-4">
+                  <button
+                    id="mic-button"
+                    class="mic-button"
+                    type="button"
+                    aria-label="Tap untuk bicara dan mencatat pengeluaran"
+                  >
+                    <i data-lucide="mic" width="29" height="29"></i>
+                  </button>
+                  <div class="min-w-0 flex-1">
+                    <p
+                      id="voice-status"
+                      class="text-sm font-semibold text-white"
+                      aria-live="polite"
+                    >
+                      Tap untuk bicara
+                    </p>
+                    <div class="wave" aria-hidden="true">
+                      <b></b><b></b><b></b><b></b><b></b>
+                    </div>
+                    <p
+                      id="voice-transcript"
+                      class="mt-1 min-h-[18px] text-xs leading-5 text-cyan-100"
+                    ></p>
+                  </div>
+                </div>
+                <p
+                  data-template-id="widget-helper"
+                  class="canva-text mt-3 text-[11px] text-slate-400"
+                  style="
+                    color: rgb(146, 169, 192);
+                    font-weight: 400;
+                    font-style: normal;
+                    font-size: 11px;
+                  "
+                >
+                  Tanpa membuka aplikasi
+                </p>
+                <div
+                  id="success-box"
+                  class="mt-3 hidden rounded-xl border border-emerald-300/20 bg-emerald-400/10 p-3 text-xs text-emerald-100"
+                >
+                  <div class="flex items-center gap-2 font-semibold">
+                    <i data-lucide="check-circle-2" width="15" height="15"></i
+                    ><span
+                      data-template-id="success-title"
+                      class="canva-text"
+                      style="
+                        color: rgb(209, 250, 229);
+                        font-weight: 600;
+                        font-size: 12px;
+                      "
+                    ></span>
+                  </div>
+                  <div class="mt-2 flex justify-between">
+                    <span id="success-name">Cilok</span
+                    ><strong id="success-amount">-Rp5.000</strong>
+                  </div>
+                  <p id="success-category" class="mt-1 text-emerald-200/80">
+                    Makanan
+                  </p>
+                </div>
+              </div>
+              <div class="app-grid" aria-label="Ikon aplikasi Android">
+                <div class="app-icon text-blue-300">
+                  <i data-lucide="message-circle" width="21" height="21"></i>
+                </div>
+                <div class="app-icon text-red-300">
+                  <i data-lucide="play" width="21" height="21"></i>
+                </div>
+                <div class="app-icon text-green-300">
+                  <i data-lucide="camera" width="21" height="21"></i>
+                </div>
+                <div class="app-icon text-amber-200">
+                  <i data-lucide="image" width="21" height="21"></i>
+                </div>
+                <div class="app-icon text-violet-300">
+                  <i data-lucide="mail" width="21" height="21"></i>
+                </div>
+                <div class="app-icon text-cyan-200">
+                  <i data-lucide="music-2" width="21" height="21"></i>
+                </div>
+                <div class="app-icon text-rose-300">
+                  <i data-lucide="heart" width="21" height="21"></i>
+                </div>
+                <div class="app-icon text-indigo-200">
+                  <i data-lucide="settings" width="21" height="21"></i>
+                </div>
+              </div>
+              <div class="search-pill">
+                <i data-lucide="search" width="16" height="16"></i
+                ><span>Telusuri aplikasi</span>
+              </div>
+            </div>
+          </article>
+          <aside
+            id="flow-indicator"
+            class="flow"
+            aria-label="Alur voice input menuju transaksi"
+          >
+            <i
+              data-lucide="mic"
+              width="19"
+              height="19"
+              class="text-cyan-200"
+            ></i>
+            <span
+              data-template-id="flow-voice"
+              class="canva-text text-center font-mono text-[9px] tracking-wider"
+              style="
+                color: rgb(168, 189, 210);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 9px;
+                letter-spacing: 0.06rem;
+              "
+              >VOICE INPUT</span
+            >
+            <div class="flow-line"></div>
+            <span
+              class="rounded-full border border-violet-300/20 bg-violet-300/10 px-2 py-1 font-mono text-[10px] text-violet-200"
+              >AI</span
+            >
+            <div class="flow-line"></div>
+            <span
+              data-template-id="flow-transaction"
+              class="canva-text text-center font-mono text-[9px] tracking-wider"
+              style="
+                color: rgb(168, 189, 210);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 9px;
+                letter-spacing: 0.06rem;
+              "
+              >TRANSACTION</span
+            >
+          </aside>
+          <article
+            class="phone"
+            aria-label="Mockup aplikasi Pengelola Keuangan"
+          >
+            <div class="screen finance-screen">
+              <div class="notch"></div>
+              <div
+                class="statusbar flex justify-between px-6 pt-3 text-slate-100"
+              >
+                <span>17.09</span>
+                <span class="flex gap-1"
+                  ><i data-lucide="signal" width="12" height="12"></i
+                  ><i data-lucide="wifi" width="12" height="12"></i
+                  ><i data-lucide="battery-full" width="13" height="13"></i
+                ></span>
+              </div>
+              <div class="px-5 pt-6">
+                <p
+                  data-template-id="finance-app-label"
+                  class="canva-text text-[11px] tracking-wide text-slate-400"
+                  style="
+                    color: rgb(143, 164, 188);
+                    font-weight: 600;
+                    font-style: normal;
+                    font-size: 11px;
+                    letter-spacing: 0.04rem;
+                  "
+                >
+                  RINGKASAN KEUANGAN
+                </p>
+                <h2
+                  data-template-id="finance-app-title"
+                  class="canva-text mt-1 text-xl font-bold"
+                  style="
+                    color: rgb(240, 248, 255);
+                    font-weight: 700;
+                    font-style: normal;
+                    font-size: 24px;
+                  "
+                >
+                  Pengelola Keuangan
+                </h2>
+              </div>
+              <div class="money-card">
+                <div class="flex justify-between gap-3">
+                  <div>
+                    <p
+                      data-template-id="expense-label"
+                      class="canva-text text-[10px] text-slate-400"
+                      style="
+                        color: rgb(154, 171, 193);
+                        font-weight: 400;
+                        font-style: normal;
+                        font-size: 10px;
+                      "
+                    >
+                      Pengeluaran
+                    </p>
+                    <p
+                      id="expense-total"
+                      class="metric-value mt-1 text-sm font-bold text-rose-200"
+                    >
+                      Rp1.186.700
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      data-template-id="income-label"
+                      class="canva-text text-[10px] text-slate-400"
+                      style="
+                        color: rgb(154, 171, 193);
+                        font-weight: 400;
+                        font-style: normal;
+                        font-size: 10px;
+                      "
+                    >
+                      Pemasukan
+                    </p>
+                    <p class="mt-1 text-sm font-bold text-emerald-200">
+                      Rp1.970.000
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-4 border-t border-slate-400/10 pt-3">
+                  <p
+                    data-template-id="balance-label"
+                    class="canva-text text-[10px] text-slate-400"
+                    style="
+                      color: rgb(154, 171, 193);
+                      font-weight: 400;
+                      font-style: normal;
+                      font-size: 10px;
+                    "
+                  >
+                    Saldo
+                  </p>
+                  <p
+                    id="balance-total"
+                    class="metric-value mt-1 text-2xl font-bold"
+                  >
+                    Rp783.300
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between px-5 pt-2">
+                <h3
+                  data-template-id="recent-title"
+                  class="canva-text text-sm font-semibold"
+                  style="
+                    color: rgb(237, 247, 255);
+                    font-weight: 600;
+                    font-style: normal;
+                    font-size: 14px;
+                  "
+                >
+                  Transaksi terbaru
+                </h3>
+                <span class="text-[10px] text-cyan-200">Oktober 2026</span>
+              </div>
+              <div id="transaction-list" class="transaction-list">
+                <button
+                  id="cilok-row"
+                  class="new-tx tx-row w-full text-left"
+                  type="button"
+                  aria-label="Buka detail transaksi Cilok"
+                >
+                  <div class="tx-icon">
+                    <i data-lucide="utensils" width="15" height="15"></i>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <p class="text-[10px] text-cyan-100">3 Okt — Sabtu</p>
+                    <p class="text-sm font-semibold">Cilok</p>
+                    <p class="text-[10px] text-slate-400">
+                      Makanan • Voice Input
+                    </p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xs font-bold text-rose-200">-Rp5.000</p>
+                    <p class="mt-1 text-[9px] text-emerald-200">✓ Dicatat</p>
+                  </div>
+                </button>
+                <div class="tx-row">
+                  <div class="tx-icon">
+                    <i data-lucide="wallet" width="15" height="15"></i>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium">Uang Saku</p>
+                    <p class="text-[10px] text-slate-400">Pemasukan</p>
+                  </div>
+                  <strong class="text-xs text-emerald-200">+Rp500.000</strong>
+                </div>
+                <div class="tx-row">
+                  <div class="tx-icon">
+                    <i data-lucide="house" width="15" height="15"></i>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium">Nyicil kontrakan</p>
+                    <p class="text-[10px] text-slate-400">Hunian</p>
+                  </div>
+                  <strong class="text-xs text-rose-200">-Rp500.000</strong>
+                </div>
+                <div class="tx-row">
+                  <div class="tx-icon">
+                    <i data-lucide="send" width="15" height="15"></i>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium">TF mas Agus</p>
+                    <p class="text-[10px] text-slate-400">Transfer</p>
+                  </div>
+                  <strong class="text-xs text-rose-200">-Rp200.000</strong>
+                </div>
+                <div class="tx-row">
+                  <div class="tx-icon">
+                    <i data-lucide="smartphone" width="15" height="15"></i>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium">Telkomsel</p>
+                    <p class="text-[10px] text-slate-400">Tagihan</p>
+                  </div>
+                  <strong class="text-xs text-rose-200">-Rp66.600</strong>
+                </div>
+                <div class="tx-row">
+                  <div class="tx-icon">
+                    <i data-lucide="coffee" width="15" height="15"></i>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium">Softcofer Skripsi</p>
+                    <p class="text-[10px] text-slate-400">Makanan</p>
+                  </div>
+                  <strong class="text-xs text-rose-200">-Rp154.600</strong>
+                </div>
+              </div>
+              <section
+                id="detail-sheet"
+                class="detail-sheet"
+                aria-label="Detail Pengeluaran"
+                aria-hidden="true"
+              >
+                <div class="detail-card">
+                  <div class="flex items-center justify-between">
+                    <h3
+                      data-template-id="detail-title"
+                      class="canva-text text-base font-bold"
+                      style="
+                        color: rgb(239, 250, 255);
+                        font-weight: 700;
+                        font-style: normal;
+                        font-size: 19px;
+                      "
+                    >
+                      Detail Pengeluaran
+                    </h3>
+                    <i
+                      data-lucide="receipt-text"
+                      width="19"
+                      height="19"
+                      class="text-cyan-200"
+                    ></i>
+                  </div>
+                  <p class="mt-4 text-xl font-bold">Cilok</p>
+                  <div class="mt-3">
+                    <div class="detail-row">
+                      <span>Nominal</span><span>Rp5.000</span>
+                    </div>
+                    <div class="detail-row">
+                      <span>Kategori</span><span>Makanan</span>
+                    </div>
+                    <div class="detail-row">
+                      <span>Jenis</span><span>Pengeluaran</span>
+                    </div>
+                    <div class="detail-row">
+                      <span>Tanggal</span><span>3 Oktober 2026</span>
+                    </div>
+                    <div class="detail-row">
+                      <span>Metode Input</span><span>Voice Input</span>
+                    </div>
+                    <div class="detail-row">
+                      <span>Transkrip</span
+                      ><span>“Tadi beli cilok lima ribu.”</span>
+                    </div>
+                  </div>
+                  <p
+                    id="edit-state"
+                    class="hidden mt-3 rounded-lg bg-cyan-300/10 p-2 text-[11px] text-cyan-100"
+                  >
+                    Mode edit sederhana aktif. Data prototype tidak diubah.
+                  </p>
+                  <button
+                    id="delete-button"
+                    data-template-id="delete-button"
+                    class="canva-button mt-3 w-full rounded-xl border border-rose-200/25 bg-rose-300/10 py-2 text-xs font-semibold text-rose-100"
+                    type="button"
+                    style="
+                      color: rgb(255, 228, 230);
+                      font-weight: 600;
+                      font-style: normal;
+                      font-size: 12px;
+                    "
+                  >
+                    Hapus Transaksi
+                  </button>
+                  <div
+                    id="delete-confirm"
+                    class="hidden mt-3 rounded-xl border border-rose-200/20 bg-rose-300/10 p-3"
+                  >
+                    <p
+                      data-template-id="delete-confirm-title"
+                      class="canva-text text-xs font-semibold"
+                      style="
+                        color: rgb(255, 228, 230);
+                        font-weight: 600;
+                        font-style: normal;
+                        font-size: 12px;
+                      "
+                    >
+                      Hapus transaksi ini?
+                    </p>
+                    <p
+                      id="delete-confirm-copy"
+                      class="mt-1 text-[11px] text-rose-100/80"
+                    ></p>
+                    <div class="mt-3 flex gap-2">
+                      <button
+                        id="cancel-delete"
+                        data-template-id="cancel-delete"
+                        class="canva-button flex-1 rounded-xl border border-slate-200/20 py-2 text-xs"
+                        type="button"
+                        style="
+                          color: rgb(226, 232, 240);
+                          font-weight: 400;
+                          font-style: normal;
+                          font-size: 12px;
+                        "
+                      >
+                        Batal</button
+                      ><button
+                        id="confirm-delete"
+                        data-template-id="confirm-delete"
+                        class="canva-button flex-1 rounded-xl bg-rose-400/80 py-2 text-xs font-bold text-white"
+                        type="button"
+                        style="
+                          background: rgba(251, 113, 133, 0.8);
+                          color: rgb(255, 255, 255);
+                          font-weight: 700;
+                          font-style: normal;
+                          font-size: 12px;
+                        "
+                      >
+                        Hapus
+                      </button>
+                    </div>
+                  </div>
+                  <div class="mt-5 flex gap-2">
+                    <button
+                      id="edit-button"
+                      data-template-id="edit-button"
+                      class="canva-button flex-1 rounded-xl border border-cyan-200/25 bg-cyan-300/10 py-2 text-xs font-semibold text-cyan-100"
+                      type="button"
+                      style="
+                        background: rgba(103, 232, 249, 0.098);
+                        color: rgb(207, 250, 254);
+                        font-weight: 600;
+                        font-style: normal;
+                        font-size: 12px;
+                      "
+                    >
+                      Edit
+                    </button>
+                    <button
+                      id="done-button"
+                      data-template-id="done-button"
+                      class="canva-button flex-1 rounded-xl bg-cyan-200 py-2 text-xs font-bold text-slate-950"
+                      type="button"
+                      style="
+                        background: rgb(165, 243, 252);
+                        color: rgb(8, 47, 73);
+                        font-weight: 700;
+                        font-style: normal;
+                        font-size: 12px;
+                      "
+                    >
+                      Selesai
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </article>
+        </section>
+      </main>
+      <footer class="hero-wrap pt-7 text-center">
+        <p
+          data-template-id="prototype-note"
+          class="canva-text text-xs text-slate-500"
+          style="
+            color: rgb(113, 129, 151);
+            font-weight: 400;
+            font-style: normal;
+            font-size: 12px;
+          "
+        >
+          Prototype demo interaktif — bukan aplikasi finansial produksi.
+        </p>
+      </footer>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        lucide.createIcons();
+
+        const micButton = document.getElementById('mic-button');
+        const voiceWidget = document.getElementById('voice-widget');
+        const voiceStatus = document.getElementById('voice-status');
+        const transcript = document.getElementById('voice-transcript');
+        const successBox = document.getElementById('success-box');
+        const successTitle = document.querySelector(
+          '[data-template-id="success-title"]'
+        );
+        const flow = document.getElementById('flow-indicator');
+        const list = document.getElementById('transaction-list');
+        const expense = document.getElementById('expense-total');
+        const balance = document.getElementById('balance-total');
+        const detailSheet = document.getElementById('detail-sheet');
+        const editState = document.getElementById('edit-state');
+        let processing = false;
+        let recognition = null;
+        let resetTimer = null;
+        let transactions = [];
+        let currentTransaction = null;
+        let expenseTotal = 1186700;
+        let balanceTotal = 783300;
+
+        function setStatus(message) {
+          voiceStatus.textContent = message;
+        }
+        function rupiah(value) {
+          return (
+            (value < 0 ? '-' : '') +
+            'Rp' +
+            Math.abs(value).toLocaleString('id-ID')
+          );
+        }
+        function parseAmount(text) {
+          const normalized = text
+            .toLowerCase()
+            .replace(/\./g, '')
+            .replace(/,/g, '');
+          const digit = normalized.match(/\b\d+\b/);
+          if (digit && Number(digit[0]) > 0) return Number(digit[0]);
+          const words = {
+            satu: 1,
+            dua: 2,
+            tiga: 3,
+            empat: 4,
+            lima: 5,
+            enam: 6,
+            tujuh: 7,
+            delapan: 8,
+            sembilan: 9,
+            sepuluh: 10,
+            sebelas: 11,
+          };
+          const match = normalized.match(
+            /\b(satu|dua|tiga|empat|lima|enam|tujuh|delapan|sembilan|sepuluh|sebelas)\s+(ribu|juta)\b/
+          );
+          if (!match) return null;
+          const base = words[match[1]];
+          return base * (match[2] === 'juta' ? 1000000 : 1000);
+        }
+        function parseTransaction(text) {
+          const lower = text.toLowerCase().trim();
+
+          const isIncome =
+            /\b(dapat|terima|pemasukan|gaji|uang saku|dikasih|menerima)\b/.test(
+              lower
+            );
+          const isExpense =
+            /\b(beli|bayar|pengeluaran|belanja|keluar|jajan|beliin)\b/.test(
+              lower
+            ) || !isIncome;
+
+          const amount = parseAmount(text);
+          if (amount === null || amount <= 0) return null;
+
+          // Buang kata-kata yang biasanya hanya menjadi "penghubung"
+          let cleaned = lower
+            .replace(/\b\d[\d.,]*\b/g, ' ')
+            .replace(/\b(rp|rupiah)\b/g, ' ')
+            .replace(
+              /\b(se|satu|dua|tiga|empat|lima|enam|tujuh|delapan|sembilan|sepuluh|sebelas)\s+(ribu|juta)\b/g,
+              ' '
+            )
+            .replace(
+              /\b(aku|saya|tadi|barusan|untuk|sebesar|seharga|senilai)\b/g,
+              ' '
+            )
+            .replace(
+              /\b(beli|bayar|pengeluaran|belanja|keluar|jajan|beliin|dapat|terima|pemasukan|gaji|dikasih|menerima)\b/g,
+              ' '
+            )
+            .replace(/\s+/g, ' ')
+            .trim();
+
+          // Kalau masih ada kata tersisa, jadikan nama transaksi
+          let name = cleaned
+            .split(' ')
+            .filter(Boolean)
+            .slice(0, 3)
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+
+          if (!name) return null;
+
+          const income =
+            isIncome && !/\b(beli|bayar|keluar|jajan)\b/.test(lower);
+
+          let category = 'Lainnya';
+
+          if (
+            /\b(cilok|sate|bakso|mie|makanan|nasi|ayam|gorengan|seblak|es teh|kopi|minum|minuman)\b/.test(
+              lower
+            )
+          ) {
+            category = 'Makanan';
+          } else if (
+            /\b(listrik|pln|telkomsel|wifi|internet|tagihan)\b/.test(lower)
+          ) {
+            category = 'Tagihan';
+          } else if (/\b(transfer|tf)\b/.test(lower)) {
+            category = 'Transfer';
+          } else if (income) {
+            category = 'Pemasukan';
+          }
+
+          return {
+            id: crypto.randomUUID
+              ? crypto.randomUUID()
+              : Date.now() + '-' + Math.random().toString(36).slice(2),
+            name,
+            amount: income ? amount : -amount,
+            type: income ? 'Pemasukan' : 'Pengeluaran',
+            category,
+            transcript: text,
+          };
+        }
+        function addTransaction(data) {
+          transactions.unshift(data);
+          currentTransaction = data;
+          if (data.amount < 0) expenseTotal += Math.abs(data.amount);
+          balanceTotal += data.amount;
+          expense.textContent = rupiah(expenseTotal);
+          balance.textContent = rupiah(balanceTotal);
+          expense.classList.add('changed');
+          balance.classList.add('changed');
+          const row = document.createElement('button');
+          row.type = 'button';
+          row.className = 'new-tx tx-row w-full text-left visible';
+          row.dataset.transactionId = data.id;
+          row.setAttribute('aria-label', 'Buka detail transaksi ' + data.name);
+          row.innerHTML =
+            '<div class="tx-icon"><i data-lucide="' +
+            (data.amount < 0 ? 'utensils' : 'wallet') +
+            '" width="15" height="15"></i></div><div class="min-w-0 flex-1"><p class="text-[10px] text-cyan-100">Hari ini</p><p class="text-sm font-semibold">' +
+            data.name +
+            '</p><p class="text-[10px] text-slate-400">' +
+            data.category +
+            ' • Voice Input</p></div><div class="text-right"><p class="text-xs font-bold ' +
+            (data.amount < 0 ? 'text-rose-200' : 'text-emerald-200') +
+            '">' +
+            rupiah(data.amount) +
+            '</p><p class="mt-1 text-[9px] text-emerald-200">✓ Dicatat</p></div>';
+          row.addEventListener('click', () => openDetail(data));
+          list.prepend(row);
+          lucide.createIcons();
+        }
+        function openDetail(data) {
+          currentTransaction = data;
+          detailSheet
+            .querySelector('.detail-card')
+            .querySelector('.text-xl').textContent = data.name;
+          detailSheet.querySelectorAll(
+            '.detail-row span:last-child'
+          )[0].textContent = rupiah(Math.abs(data.amount));
+          detailSheet.querySelectorAll(
+            '.detail-row span:last-child'
+          )[1].textContent = data.category;
+          detailSheet.querySelectorAll(
+            '.detail-row span:last-child'
+          )[2].textContent = data.type;
+          detailSheet.querySelectorAll(
+            '.detail-row span:last-child'
+          )[5].textContent = '“' + data.transcript + '”';
+          detailSheet.classList.add('open');
+          detailSheet.setAttribute('aria-hidden', 'false');
+        }
+        function resetReady() {
+          processing = false;
+          voiceWidget.classList.remove('is-listening');
+          flow.classList.remove('active');
+          micButton.disabled = false;
+          setStatus('Tap microphone untuk mencatat');
+          transcript.textContent = '';
+          successBox.classList.add('hidden');
+        }
+        function processTransaction(text) {
+          if (!processing) return;
+          setStatus('Memproses...');
+          voiceWidget.classList.remove('is-listening');
+          flow.classList.add('active');
+          const data = parseTransaction(text);
+          if (!data) {
+            showError(
+              'Transaksi tidak dapat dikenali: nominal atau jenis transaksi tidak ditemukan.'
+            );
+            return;
+          }
+          window.setTimeout(() => {
+            if (!processing) return;
+            addTransaction(data);
+            successTitle.textContent =
+              data.amount < 0
+                ? 'Pengeluaran berhasil dicatat'
+                : 'Pemasukan berhasil dicatat';
+            successBox.classList.remove('hidden');
+            flow.classList.remove('active');
+            setStatus('Berhasil dicatat');
+            resetTimer = window.setTimeout(resetReady, 1500);
+          }, 650);
+        }
+        function showError(message) {
+          processing = false;
+          voiceWidget.classList.remove('is-listening');
+          flow.classList.remove('active');
+          micButton.disabled = true;
+          setStatus(message);
+          window.setTimeout(resetReady, 1800);
+        }
+        async function beginRecognition() {
+          if (processing) return;
+          clearTimeout(resetTimer);
+          processing = true;
+          let sessionFinal = '';
+          let hasFinal = false;
+          let hasProcessed = false;
+          let mediaStream = null;
+          const stopMediaStream = () => {
+            if (mediaStream) {
+              mediaStream.getTracks().forEach((track) => track.stop());
+              mediaStream = null;
+            }
+          };
+          voiceWidget.classList.add('is-listening');
+          flow.classList.add('active');
+          micButton.disabled = true;
+          transcript.textContent = '';
+          try {
+            mediaStream = await navigator.mediaDevices.getUserMedia({
+              audio: true,
+            });
+          } catch (error) {
+            const messages = {
+              NotAllowedError:
+                'Akses microphone ditolak. Periksa izin microphone Chrome.',
+              PermissionDeniedError:
+                'Akses microphone ditolak. Periksa izin microphone Chrome.',
+              NotFoundError: 'Microphone tidak ditemukan.',
+              DevicesNotFoundError: 'Microphone tidak ditemukan.',
+              NotReadableError: 'Microphone sedang digunakan aplikasi lain.',
+              TrackStartError: 'Microphone sedang digunakan aplikasi lain.',
+            };
+            stopMediaStream();
+            showError(
+              messages[error.name] || 'Microphone tidak dapat diakses.'
+            );
+            return;
+          }
+          const Recognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+          if (!Recognition) {
+            stopMediaStream();
+            showError('Speech recognition tidak tersedia di browser ini.');
+            return;
+          }
+          setStatus('Mendengarkan...');
+          try {
+            recognition = new Recognition();
+            recognition.lang = 'id-ID';
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.onresult = (event) => {
+              let interim = '';
+              for (let i = event.resultIndex; i < event.results.length; i++) {
+                const phrase = event.results[i][0].transcript.trim();
+                if (event.results[i].isFinal)
+                  sessionFinal += (sessionFinal ? ' ' : '') + phrase;
+                else interim += phrase;
+              }
+              transcript.textContent = '“' + (sessionFinal || interim) + '”';
+              if (sessionFinal && !hasFinal && !hasProcessed) {
+                hasFinal = true;
+                hasProcessed = true;
+                try {
+                  recognition.stop();
+                } catch (e) {}
+                stopMediaStream();
+                processTransaction(sessionFinal);
+              }
+            };
+            recognition.onerror = (event) => {
+              const messages = {
+                'not-allowed':
+                  'Akses microphone ditolak. Periksa izin microphone Chrome.',
+                'service-not-allowed': 'Layanan speech recognition ditolak.',
+                'audio-capture': 'Microphone tidak dapat diakses.',
+                network: 'Recognition gagal karena jaringan.',
+                aborted: 'Speech recognition dihentikan.',
+                'no-speech': 'Tidak ada suara terdeteksi',
+              };
+              stopMediaStream();
+              if (!hasFinal)
+                showError(
+                  messages[event.error] ||
+                    'Speech recognition gagal: ' +
+                      (event.error || 'unknown') +
+                      '.'
+                );
+            };
+            recognition.onend = () => {
+              recognition = null;
+              stopMediaStream();
+              if (!hasFinal && processing)
+                showError('Tidak ada suara terdeteksi');
+            };
+            recognition.start();
+          } catch (error) {
+            recognition = null;
+            stopMediaStream();
+            showError(
+              'Speech recognition gagal dimulai: ' +
+                (error.message || 'penyebab tidak diketahui') +
+                '.'
+            );
+          }
+        }
+
+        micButton.addEventListener('click', beginRecognition);
+
+        document.getElementById('cilok-row').addEventListener('click', () => {
+          if (transactions.length) openDetail(transactions[0]);
+        });
+
+        document.getElementById('done-button').addEventListener('click', () => {
+          detailSheet.classList.remove('open');
+          detailSheet.setAttribute('aria-hidden', 'true');
+          editState.classList.add('hidden');
+        });
+
+        const deleteConfirm = document.getElementById('delete-confirm');
+        const deleteCopy = document.getElementById('delete-confirm-copy');
+        document.getElementById('edit-button').addEventListener('click', () => {
+          editState.classList.remove('hidden');
+        });
+        document
+          .getElementById('delete-button')
+          .addEventListener('click', () => {
+            if (!currentTransaction) return;
+            deleteCopy.textContent =
+              'Transaksi ' +
+              currentTransaction.name +
+              ' sebesar ' +
+              rupiah(Math.abs(currentTransaction.amount)) +
+              ' akan dihapus.';
+            deleteConfirm.classList.remove('hidden');
+          });
+        document
+          .getElementById('cancel-delete')
+          .addEventListener('click', () =>
+            deleteConfirm.classList.add('hidden')
+          );
+        document
+          .getElementById('confirm-delete')
+          .addEventListener('click', () => {
+            if (!currentTransaction) return;
+            const targetId = currentTransaction.id;
+            const index = transactions.findIndex(
+              (item) => item.id === targetId
+            );
+            if (index < 0) return;
+            const removed = transactions.splice(index, 1)[0];
+            if (removed.amount < 0) expenseTotal -= Math.abs(removed.amount);
+            balanceTotal -= removed.amount;
+            expense.textContent = rupiah(expenseTotal);
+            balance.textContent = rupiah(balanceTotal);
+            const row = [...list.querySelectorAll('button')].find(
+              (item) => item.dataset.transactionId === targetId
+            );
+            if (row) row.remove();
+            currentTransaction = null;
+            deleteConfirm.classList.add('hidden');
+            detailSheet.classList.remove('open');
+            detailSheet.setAttribute('aria-hidden', 'true');
+          });
+      });
+    </script>
+  </body>
+</html>
